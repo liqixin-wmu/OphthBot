@@ -1,0 +1,34 @@
+pipeline: ocular_surface
+
+input:
+  excel_path: data/ocular_surface_normalized.xlsx
+  image_root: data/images
+
+weights:
+  initialization_checkpoint: weights/densenet121_initialization.pth.tar
+  pretrained_fold_model_dir: weights/ocular_surface_fold_models
+
+output:
+  split_dir: outputs/ocular_surface/splits
+  result_dir: outputs/ocular_surface/results
+
+cross_validation:
+  num_folds: 10
+  num_epochs: 25
+  batch_size: 32
+  learning_rate: 0.0001
+  num_workers: 2
+  random_seed: 42
+
+experiment:
+  external_source: aksu
+
+normalization:
+  mean: [0.5765, 0.3493, 0.2402]
+  std: [0.2179, 0.1920, 0.1781]
+
+model:
+  architecture: densenet121
+  num_classes: 2
+  unfreeze_denseblock4: true
+  unfreeze_classifier: true

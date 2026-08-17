@@ -1,0 +1,36 @@
+pipeline: cataract
+
+input:
+  excel_path: data/cataract_normalized.xlsx
+  image_root: data/images
+
+weights:
+  initialization_checkpoint: weights/cataract_pretrain.pth.tar
+
+output:
+  result_dir: outputs/cataract
+
+cross_validation:
+  num_folds: 10
+  num_epochs: 25
+  batch_size: 32
+  learning_rate: 0.0001
+  num_workers: 4
+  random_seed: 42
+  resume_fold: 1
+
+experiment:
+  stage_name: cataract_transfer
+  internal_sources: [hangzhou, ningbo, wenzhou, wushi]
+  external_sources: [aksu, baicheng, kuche, shaya, xinhe]
+
+normalization:
+  image_size: 224
+  mean: [0.23320706, 0.1716647, 0.09847063]
+  std: [0.28459105, 0.22442709, 0.14913696]
+
+model:
+  architecture: densenet121
+  num_classes: 2
+  transfer_top_n: 1
+  freeze_backbone: true
