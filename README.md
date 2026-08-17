@@ -151,16 +151,6 @@ This design prevents threshold leakage from training data and avoids sharing one
 - `all_fold_results.pkl`
 - `fold_<k>_<stage>.csv`
 
-## Public-release checklist
-
-Before pushing to GitHub:
-
-1. Do not commit raw patient data.
-2. Do not commit proprietary checkpoints unless sharing is intentional.
-3. Do not leave private local paths in configs or shell history.
-4. Do not include spreadsheets with direct identifiers.
-5. Confirm that all source names and column names are ASCII-only.
-
 ## Suggested manuscript wording
 
 ### Ocular surface threshold selection
